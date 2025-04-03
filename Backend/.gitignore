@@ -1,0 +1,19 @@
+# Ignore Node.js dependencies
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Ignore environment variables
+.env
+
+# Ignore SQLite database files
+database.sqlite
+*.sqlite3
+
+# Ignore Sequelize auto-generated folders
+migrations/
+seeders/
+
+# Ignore system files
+.DS_Store
+Thumbs.db
