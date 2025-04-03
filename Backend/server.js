@@ -8,7 +8,7 @@ const userRoutes = require("./routes/userRoutes");
 const app = express();
 app.use(cors());
 app.use(express.json()); 
-
+app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/events", eventRoutes);
 app.use("/api/users", userRoutes); 

@@ -3,6 +3,7 @@ const { User } = require("../models"); // Import User model
 // Create a user
 const createUser = async (req, res) => {
     try {
+        console.log("Received Data:", req.body);
         const user = await User.create(req.body);
         res.status(201).json(user);
     } catch (error) {
