@@ -7,16 +7,14 @@ const jwt = require("jsonwebtoken");
 
 // Create  user
 const createUser = async (req, res) => {
-    // checks validation rules
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() }); // Stops execution
+        return res.status(400).json({ error: "Validation failed", details: errors.array() });
     }
-    
+
     const { name, email, password } = req.body;
 
     try {
-        // Check if user with same email or username exists
         const existingUser = await User.findOne({
             where: { [Op.or]: [{ name }, { email }] }
         });
@@ -25,17 +23,15 @@ const createUser = async (req, res) => {
             return res.status(400).json({ error: "Username or Email already in use" });
         }
 
-        // Hash  password 
         const hashedPassword = await bcrypt.hash(password, 10);
-
-        // Create user with hashed password
         const user = await User.create({ name, email, password: hashedPassword });
 
-        res.status(201).json(user);
+        return res.status(201).json({ message: "User created successfully", user });
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        return res.status(500).json({ error: "Server error", details: error.message });
     }
 };
+
 
 // Get all users
 const getAllUsers = async (req, res) => {
