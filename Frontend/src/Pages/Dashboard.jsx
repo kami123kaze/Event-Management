@@ -3,15 +3,42 @@ import { useNavigate } from "react-router-dom";
 import EventList from "../Components/Eventlist";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { jwtDecode } from "jwt-decode"; // ✅ Correct
 
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  // eslint-disable-next-line no-unused-vars
   const [weeklyCount, setWeeklyCount] = useState(0);
   // eslint-disable-next-line no-unused-vars
   const [events, setEvents] = useState([]);
+  
 
+  const [username, setUsername] = useState("");
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) return;
+  
+        // Decode token to get user ID
+        const decoded = jwtDecode(token);
+        const userId = decoded.id; // or decoded.userId based on your payload
+  
+        const res = await axios.get(`http://localhost:5000/api/users/${userId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+  
+        setUsername(res.data.name);
+      } catch (err) {
+        console.error("Failed to fetch user profile", err);
+      }
+    };
+  
+    fetchUser();
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -48,7 +75,7 @@ const Dashboard = () => {
     />
     <div>
       <p className="text-sm text-gray-600">Logged in as</p>
-      <p className="text-base font-medium text-gray-800">John Doe</p> {/* Replace later with real user data */}
+      <p className="text-base font-medium text-gray-800">{username || "Loading..."}</p>
     </div>
   </div>
 

@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { body } = require("express-validator");
 const { loginUser } = require("../controllers/userController");
+const authMiddleware = require("../middleware/authMiddleware.js");
 
 //validation rules 
 const validateUser = [
@@ -23,5 +24,5 @@ router.get("/:id", userController.getUserById); // Get user by ID
 router.put("/:id", userController.updateUser); // Update user
 router.delete("/:id", userController.deleteUser); // Delete user
 router.post("/login", loginUser); // user login && jwt authentication
-
+router.get("/me",authMiddleware, userController.getUserProfile);//user fetch in fe
 module.exports = router;

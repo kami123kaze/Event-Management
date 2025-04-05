@@ -65,6 +65,16 @@ const LoginPage = () => {
           <Button className="w-full" variant="primary" type="submit">
             Login
           </Button>
+          <p className="text-center text-sm text-gray-300 mt-4">
+            Not a user?{" "}
+            <span
+              onClick={() => navigate("/signup")}
+              className="text-blue-400 hover:underline cursor-pointer"
+            >
+              Sign up
+            </span>
+          </p>
+
         </form>
       </div>
     </div>
