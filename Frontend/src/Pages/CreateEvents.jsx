@@ -25,7 +25,8 @@ const CreateEvent = () => {
     e.preventDefault();
   
     try {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("token"); 
+
   
       await axios.post("http://localhost:5000/api/events", formData, {
         headers: {

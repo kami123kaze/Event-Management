@@ -1,25 +1,35 @@
 const { Event } = require("../models"); 
 const { validationResult } = require("express-validator");
+const { User } = require("../models");
+
 // Create  event
 const createEvent = async (req, res) => {
-    const errors = validationResult(req); //validation here insted of the middleware since, multiple instances of same validation not required
+    const errors = validationResult(req); // only one instance 
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
   
     try {
-      const event = await Event.create(req.body);
-      
+      const event = await Event.create({
+        ...req.body,
+        userId: req.user.id, // attach userId from token
+        
+      });
+  
       res.status(201).json(event);
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
   };
-
 // Get  events
 const getAllEvents = async (req, res) => {
     try {
-        const events = await Event.findAll();
+        const events = await Event.findAll({
+            include: {
+                model: User,
+                attributes: ['id', 'name','email'],
+            },
+        });
         res.json(events);
     } catch (error) {
         res.status(500).json({ error: error.message });

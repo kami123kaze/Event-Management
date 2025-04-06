@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const { body} = require("express-validator");
+const authMiddleware = require("../middleware/authMiddleware.js");
+
 
 
 const eventController = require("../controllers/eventController");
@@ -12,10 +14,10 @@ const validateEvent = [
   ];
 
 //API routes imp**
-router.post("/", validateEvent, eventController.createEvent);  // Create event && validation
+router.post("/",authMiddleware, validateEvent, eventController.createEvent);  // Create event && validation
 router.get("/", eventController.getAllEvents); // Get all events
-router.get("/:id", eventController.getEventById); // Get event by ID
+router.get("/:id",authMiddleware, eventController.getEventById); // Get event by ID
 router.put("/:id", eventController.updateEvent); // Update event
-router.delete("/:id", eventController.deleteEvent); // Delete event
+router.delete("/:id",authMiddleware, eventController.deleteEvent);
 
 module.exports = router;
