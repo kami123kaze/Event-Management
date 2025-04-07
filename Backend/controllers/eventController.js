@@ -2,6 +2,7 @@ const { Event } = require("../models");
 const { validationResult } = require("express-validator");
 const { User } = require("../models");
 
+
 // Create  event
 const createEvent = async (req, res) => {
     const errors = validationResult(req); // only one instance 
