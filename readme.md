@@ -25,26 +25,28 @@ A full-stack event management system built with:
 - [x] Conditional delete button for the owner of the event.
 
 ---
+### Attendee Management
+- [x] RSVP to Event
+- [x] Unregister from Event
 
+### UI
+- [x] Dashboard layout and routing
+- [x] Show error/success notifications with better UX
+
+### Auth & Middleware
+- [x] Add role-based access (optional)
 
 ## In Progress
 
 ### Attendee Management
-- [ ] RSVP to Event
-- [ ] Unregister from Event
 - [ ] View Attendees for a Specific Event (by creator only)
 - [ ] Add dedicated route/page to list attendees
 
-### UI
-- [ ] Dashboard layout and routing
-- [ ] Show error/success notifications with better UX
+
 
 ---
 
 ## To Be Done
-
-### Auth & Middleware
-- [x] Add role-based access (optional)
 
 
 ### Event Editing
@@ -53,12 +55,6 @@ A full-stack event management system built with:
 ### Validation
 - [ ] Form validation (client + server)
 
-### Deployment
-- [ ] Setup frontend for production
-- [ ] Setup backend for production
-- [ ] Deployment (Render / Vercel / Railway / Others)
-
----
 
 ```bash
 cd backend
