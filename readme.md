@@ -22,6 +22,7 @@ A full-stack event management system built with:
 - [x] Delete Event (Only Creator can delete)
 - [x] Middleware to check event ownership before edit/delete
 - [x] Fetch username for each user alongside events to enhance user experience.
+- [x] Conditional delete button for the owner of the event.
 
 ---
 
@@ -43,7 +44,7 @@ A full-stack event management system built with:
 ## To Be Done
 
 ### Auth & Middleware
-- [ ] Add role-based access (optional)
+- [x] Add role-based access (optional)
 
 
 ### Event Editing
