@@ -36,24 +36,15 @@ A full-stack event management system built with:
 ### Auth & Middleware
 - [x] Add role-based access (optional)
 
-## In Progress
-
-### Attendee Management
-- [ ] View Attendees for a Specific Event (by creator only)
-- [ ] Add dedicated route/page to list attendees
-
-
-
----
-
-## To Be Done
-
+ ### Attendee Management
+- [x] View Attendees for a Specific Event (by creator only)
+- [x] Add dedicated route/page to list attendees
 
 ### Event Editing
-- [ ] Add edit functionality for event creator
+- [x] Add edit functionality for event creator
 
 ### Validation
-- [ ] Form validation (client + server)
+- [x] Form validation (client + server)
 
 
 ```bash
