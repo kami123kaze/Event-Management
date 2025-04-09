@@ -4,8 +4,10 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import Dashboard from "./pages/Dashboard";
-import CreateEvent from "./Pages/CreateEvents";
+import Dashboard from "./Pages/Dashboard";
+import CreateEvent from "./pages/CreateEvents";
+import EventManagment from "./pages/EventManagment";
+import AttendeeManagment from "./pages/AttendeeManagment";
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/create-event" element={<CreateEvent />} />
+        <Route path="/event-managment" element={<EventManagment />} />
+        <Route path="/attendee-managment" element={<AttendeeManagment />} />
 
       </Routes>
     </Router>

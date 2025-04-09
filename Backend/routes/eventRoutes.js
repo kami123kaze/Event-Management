@@ -5,6 +5,7 @@ const authMiddleware = require("../middleware/authMiddleware.js");
 const {
   rsvpToEvent,
   getAttendeeCount,
+  getAttendee
 } = require("../controllers/attendingController");
 
 
@@ -25,6 +26,7 @@ router.put("/:id", eventController.updateEvent); // Update event
 router.delete("/:id",authMiddleware, eventController.deleteEvent); // deletion with auth
 router.post("/:id/rsvp", authMiddleware, rsvpToEvent); // revp with auth
 router.get("/:id/attending-count", getAttendeeCount); // fetch total count
-
+router.put('/:id/', eventController.editEvent);// edit self event
+router.get("/:id/attendees", getAttendee)//getting attendees
 
 module.exports = router;

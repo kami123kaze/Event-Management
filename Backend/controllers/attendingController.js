@@ -1,4 +1,5 @@
 const { Attending, Event } = require("../models");
+const { User } = require("../models");
 
 const rsvpToEvent = async (req, res) => {
   const { id: eventId } = req.params;
@@ -38,7 +39,25 @@ const getAttendeeCount = async (req, res) => {
   }
 };
 
+const getAttendee = async (req,res) =>{
+  const {id:eventId} = req.params;
+
+  try {
+    const attendees = await Attending.findAll({
+      where: { eventId },  
+      include: {
+        model: User,
+        attributes: ['id', 'name', 'email'],
+    },
+    })
+    res.json(attendees)
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
 module.exports = {
   rsvpToEvent,
   getAttendeeCount,
+  getAttendee,
 };

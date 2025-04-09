@@ -103,7 +103,10 @@ const Dashboard = () => {
         className="cursor-pointer text-blue-600 hover:underline hover:text-blue-800 transition-all"
             >Create New Event
         </li>
-          <li>Manage Attendees</li>
+        <li onClick={() => navigate("/event-managment")} 
+        className="cursor-pointer text-blue-600 hover:underline hover:text-blue-800 transition-all"
+            >View/Edit your Events
+        </li>
             <li>View Reports</li>
           </ul>
         </div>

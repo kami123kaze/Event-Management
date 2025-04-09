@@ -74,4 +74,23 @@ const deleteEvent = async (req, res) => {
     }
 };
 
-module.exports = { createEvent, getAllEvents, getEventById, updateEvent, deleteEvent };
+const editEvent = async (req, res) =>{
+    try{
+        const event = await Event.findByPk(req.params.id);
+        if (!event) return res.status(404).json({ message: "Event not found" });
+
+        const { name, description, date, location } = req.body;
+
+        event.name = name ?? event.name;
+        event.description = description ?? event.description;
+        event.date = date ?? event.date;
+        event.location = location ?? event.location;
+    
+        await event.save();
+    
+        res.json({ message: "Event updated successfully", event });
+      } catch (error) {
+        res.status(500).json({ error: error.message });
+      }}
+
+module.exports = { createEvent, getAllEvents, getEventById, updateEvent, deleteEvent, editEvent };

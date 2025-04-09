@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
+import SearchBar from "./SearchBar";
+
 
 const EventList = () => {
   const [events, setEvents] = useState([]);
   const [error, setError] = useState("");
   const [userId, setUserId] = useState("");
   const [attendeeCounts, setAttendeeCounts] = useState({});
-
+  const [searchTerm, setSearchTerm] = useState("");
+  
+ 
   
 
   useEffect(() => {
@@ -49,7 +53,10 @@ const EventList = () => {
     fetchEvents();
   }, []);
   
-
+  const filteredEvents = events.filter(event =>
+    event.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  
   if (error) return <div className="text-red-500">{error}</div>;
 
   const handleDelete = async (eventId) => {
@@ -96,15 +103,18 @@ const EventList = () => {
     }
   };
   
+  
 
   return (
     <div className="p-6">
       <h2 className="text-2xl font-bold mb-4">Upcoming Events</h2>
-      {events.length === 0 ? (
-        <p>No events found.</p>
-      ) : (
+      <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+
+            {filteredEvents.length === 0 ? (
+              <p>No events found.</p>
+            ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {events.map((event) => {
+          {filteredEvents.map((event) => {
 
             return (
               <div key={event.id} className="bg-white p-4 rounded shadow">
@@ -118,7 +128,16 @@ const EventList = () => {
                     year: "numeric",
                   })}
                 </p>
-                {/* 🧍 Attending Count */}
+                {/* Created by line */}
+                    <p className="text-sm text-gray-500 mt-1">
+                      Created by:{" "}
+                      {event.userId === userId ? (
+                        <span className="text-blue-600 font-medium">You (Owner)</span>
+                      ) : (
+                        <span className="text-gray-700 font-medium">{" "}{event.User.name || "Unknown"}</span>
+                      )}
+                    </p>
+                {/*  Attending Count */}
                   <p className="text-sm text-blue-600 mt-1 font-medium">
                     Attending: <span className="font-semibold">{attendeeCounts[event.id] || 0}</span>
                   </p>
