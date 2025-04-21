@@ -1,4 +1,4 @@
-# Event Management System — Development Progress
+# Event Management System
 
 A full-stack event management system built with:
 
@@ -8,7 +8,7 @@ A full-stack event management system built with:
 
 ---
 
-## Completed Features
+
 
 ### Authentication
 - [x] User Registration
